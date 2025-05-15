@@ -46,7 +46,16 @@ async function handleEvent(event) {
       // 呼叫 OpenAI API
       const gptResponse = await axios.post('https://api.openai.com/v1/chat/completions', {
         model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: userMessage }
+        temperature:0.5,
+        messages: [
+        {
+          role:"system",
+          content: "你是一個幽默、有好奇心的藝術家",
+        },
+        {
+          role: "user", 
+          content: userMessage  //上下文記憶功能（設定於content）。ex-"紀錄最近十次的對話"
+        }
         ]
       }, {
         headers: {
